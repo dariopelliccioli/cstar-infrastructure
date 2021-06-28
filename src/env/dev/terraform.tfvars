@@ -153,10 +153,25 @@ eventhubs = [
       }
 ] }]
 external_domain = "pagopa.it"
-## TODO: this is actually for production ... wait for dev and uat
-cidr_hub_vnet            = ["10.230.6.0/24"]
-cidr_hub_mng_subnet      = ["10.230.6.0/26"]
-cidr_hub_firewall_subnet = ["10.230.6.64/26"]
+cidr_hub_vnet            = ["10.230.7.0/24"]
+cidr_hub_mng_subnet      = ["10.230.7.0/25"]
+cidr_hub_firewall_subnet = ["10.230.7.128/25"]
+
+# Restrict access  ... or remove ssh in favour of the bastion host
+hub_mgmt_rules = [
+  {
+    name                       = "allow-ssh"
+    priority                   = "100"
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_ranges         = "*"
+    source_address_prefix      = "*"
+    destination_port_ranges    = "22"
+    destination_address_prefix = "*"
+    description                = "Allow SSH to management subnet from any address"
+  }
+]
 
 pm_backend_host = "127.0.0.1"
 pm_ip_filter_range = {

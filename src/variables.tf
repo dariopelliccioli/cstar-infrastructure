@@ -55,6 +55,10 @@ variable "cidr_hub_firewall_subnet" {
   description = "Cidr hub firewall subnet."
 }
 
+variable "hub_mgmt_rules" {
+  description = "Security rules subnet hub management."
+}
+
 ## Public DNS Zone ##
 variable "dns_zone_prefix" {
   type        = string
