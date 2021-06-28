@@ -153,6 +153,11 @@ eventhubs = [
       }
 ] }]
 external_domain = "pagopa.it"
+## TODO: this is actually for production ... wait for dev and uat
+cidr_hub_vnet            = ["10.230.6.0/24"]
+cidr_hub_mng_subnet      = ["10.230.6.0/26"]
+cidr_hub_firewall_subnet = ["10.230.6.64/26"]
+
 pm_backend_host = "127.0.0.1"
 pm_ip_filter_range = {
   from = "10.230.1.1"

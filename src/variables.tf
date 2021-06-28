@@ -39,6 +39,22 @@ variable "cidr_subnet_appgateway" {
   description = "Application gateway address space."
 }
 
+## hub vnet ###
+variable "cidr_hub_vnet" {
+  type        = list(string)
+  description = "Hub virtual network address space."
+}
+
+variable "cidr_hub_mng_subnet" {
+  type        = list(string)
+  description = "Cidr hub management subnet."
+}
+
+variable "cidr_hub_firewall_subnet" {
+  type        = list(string)
+  description = "Cidr hub firewall subnet."
+}
+
 ## Public DNS Zone ##
 variable "dns_zone_prefix" {
   type        = string
