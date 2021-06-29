@@ -27,7 +27,7 @@ module "hub_mng_snet" {
 ## Firewall subnet
 module "hub_firewall_snet" {
   source               = "git::https://github.com/pagopa/azurerm.git//subnet?ref=v1.0.7"
-  name                 = format("%s-hub-firewall-snet", local.project)
+  name                 = "AzureFirewallSubnet"
   address_prefixes     = var.cidr_hub_firewall_subnet
   resource_group_name  = azurerm_resource_group.rg_hub_vnet.name
   virtual_network_name = module.hub_vnet.name
@@ -53,4 +53,19 @@ resource "azurerm_network_security_rule" "nsg_hub_rules" {
   description                 = lookup(var.hub_mgmt_rules[count.index], "description", "defaultplaceholder")
   resource_group_name         = azurerm_resource_group.rg_hub_vnet.name
   network_security_group_name = azurerm_network_security_group.hub_mgmt_nsg.name
+}
+
+module "hub_firewall" {
+  source              = "/Users/uolter/src/pagopa/azurerm/firewall"
+  name                = format("%s-hub-firewall", local.project)
+  location            = azurerm_resource_group.rg_hub_vnet.location
+  resource_group_name = azurerm_resource_group.rg_hub_vnet.name
+
+  ip_configurations = [{
+    name      = format("subnet-config")
+    subnet_id = module.hub_firewall_snet.id
+  }]
+
+  tags = var.tags
+
 }

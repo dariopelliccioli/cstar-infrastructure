@@ -152,7 +152,7 @@ eventhubs = [
         manage = false
       }
 ] }]
-external_domain = "pagopa.it"
+external_domain          = "pagopa.it"
 cidr_hub_vnet            = ["10.230.7.0/24"]
 cidr_hub_mng_subnet      = ["10.230.7.0/25"]
 cidr_hub_firewall_subnet = ["10.230.7.128/25"]
