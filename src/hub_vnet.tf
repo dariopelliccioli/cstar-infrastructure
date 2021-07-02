@@ -56,7 +56,7 @@ resource "azurerm_network_security_rule" "nsg_hub_rules" {
 }
 
 module "hub_firewall" {
-  source              = "/Users/uolter/src/pagopa/azurerm/firewall"
+  source              = "git::https://github.com/pagopa/azurerm.git//firewall?ref=module-firewall"
   name                = format("%s-hub-firewall", local.project)
   location            = azurerm_resource_group.rg_hub_vnet.location
   resource_group_name = azurerm_resource_group.rg_hub_vnet.name
