@@ -34,28 +34,12 @@ az account set -s "${SUBSCRIPTION}"
 
 # shellcheck disable=SC1090
 source "${WORKDIR}/subscriptions/${SUBSCRIPTION}/backend.ini"
-source "${WORKDIR}/subscriptions/${SUBSCRIPTION}/.bastianhost.ini"
 
 # shellcheck disable=SC2154
 printf "Subscription: %s\n" "${SUBSCRIPTION}"
 printf "Resource Group Name: %s\n" "${resource_group_name}"
 printf "Storage Account Name: %s\n" "${storage_account_name}"
 
-## remove .terraform dir to avoid error changing subscription
-rm -rf "${WORKDIR}/.terraform"
-
-# removed using vpn
-# export DESTINATION_IP="${vm_public_ip}"
-# export USERNAME="${vm_user_name}"
-# export TARGET="${psql_private_fqdn}:5432"
-# export SOCKET_FILE="/tmp/$SUBSCRIPTION-terraform-sock"
-# export RANDOM_PORT=$(echo $((10000 + $RANDOM % 60000)))
-
-# bash scripts/ssh-port-forward.sh
-# trap "ssh -S $SOCKET_FILE -O exit $USERNAME@$DESTINATION_IP" EXIT
-
-# export TF_VAR_psql_port="${RANDOM_PORT}"
-# export TF_VAR_psql_hostname="localhost"
 
 export TF_VAR_psql_port="5432"
 export TF_VAR_psql_hostname="${psql_private_fqdn}"

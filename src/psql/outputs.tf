@@ -1,3 +1,4 @@
+/*
 output "psql_username" {
   value     = "${local.psql_username}@${var.psql_servername}"
   sensitive = true
@@ -22,3 +23,4 @@ output "bpd_payment_instrument_remote_user_password" {
   value     = data.azurerm_key_vault_secret.user_password["BPD_PAYMENT_INSTRUMENT_REMOTE_USER"].value
   sensitive = true
 }
+*/

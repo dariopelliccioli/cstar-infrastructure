@@ -38,16 +38,3 @@ variable "psql_password" {
   default = null
 }
 
-variable "users" {
-  description = "List of users with grants."
-  type = list(object({
-    name = string
-    grants = list(object({
-      object_type = string
-      database    = string
-      schema      = string
-      privileges  = list(string)
-    }))
-  }))
-  default = []
-}
