@@ -644,6 +644,11 @@ variable "cosmos_mongo_db_transaction_params" {
   })
 }
 
+variable "cidr_subnet_adf" {
+  type        = list(string)
+  description = "Azure Data Factory integration runtime address space."
+}
+
 variable "tags" {
   type = map(any)
   default = {
