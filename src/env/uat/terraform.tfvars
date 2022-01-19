@@ -213,6 +213,8 @@ cidr_subnet_dnsforwarder    = ["10.1.133.0/29"]
 cidr_subnet_flex_dbms       = ["10.1.136.0/24"]
 cidr_subnet_storage_account = ["10.1.137.0/24"]
 cidr_subnet_cosmos_mongodb  = ["10.1.138.0/24"]
+cidr_subnet_adf          = ["10.1.135.0/24"]
+
 
 # integration vnet
 # https://www.davidc.net/sites/default/subnets/subnets.html?network=10.230.7.0&mask=24&division=7.31
