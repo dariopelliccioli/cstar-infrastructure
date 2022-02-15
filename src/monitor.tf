@@ -164,3 +164,44 @@ module "web_test_api" {
   ]
 
 }
+
+
+resource "azurerm_monitor_scheduled_query_rules_alert" "availability" {
+  name                = format("%s-mean-availability-query-alert", var.prefix)
+  location            = var.location
+  resource_group_name = azurerm_resource_group.monitor_rg.name
+
+  action {
+    action_group           = []
+    email_subject          = "Email Header"
+    custom_webhook_payload = "{}"
+  }
+
+  data_source_id = azurerm_application_insights.application_insights.id
+  description    = "xxx"
+  enabled        = true
+  query       = <<-QUERY
+  AzureDiagnostics
+  | where Resource == 'CSTAR-P-APIM' and ( responseCode_d < 300 or responseCode_d == 404)
+  | summarize n_success = toreal(count()) by bin(TimeGenerated, 1h)
+  | join kind=inner (
+  AzureDiagnostics
+  | where Resource == 'CSTAR-P-APIM'
+  | summarize n_total = toreal(count()) by bin(TimeGenerated, 1h))
+  on TimeGenerated
+  | project TimeGenerated, availability=n_success/n_total
+QUERY
+  severity    = 1
+  frequency   = 60
+  time_window = 240
+  trigger {
+    operator  = "LessThanOrEqual"
+    threshold = 1
+    metric_trigger {
+      operator            = "GreaterThan"
+      threshold           = 2
+      metric_trigger_type = "Total"
+      metric_column       = "availability"
+    }
+  }
+}
