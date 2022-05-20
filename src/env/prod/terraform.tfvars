@@ -210,7 +210,7 @@ cidr_subnet_dnsforwarder    = ["10.1.134.0/29"]
 cidr_subnet_flex_dbms       = ["10.1.136.0/24"]
 cidr_subnet_storage_account = ["10.1.137.0/24"]
 cidr_subnet_cosmos_mongodb  = ["10.1.138.0/24"]
-cidr_subnet_adf          = ["10.1.135.0/24"]
+cidr_subnet_adf             = ["10.1.135.0/24"]
 
 
 # integration vnet
